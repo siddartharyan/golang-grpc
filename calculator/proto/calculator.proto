@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+
+package calculator;
+
+option go_package = "github.com/golang-grpc/calculator/proto";
+
+
+message CalulatorRequest{
+  int32 first = 1;
+  int32 second = 2;
+  int32 operation = 3;
+}
+
+message Request{
+  int32 number = 1;
+}
+
+message CalculatorResponse{
+  int32 result = 1;
+}
+
+service CalulatorService{
+  rpc Calculate(CalulatorRequest) returns (CalculatorResponse);
+  rpc CalculateNumbers(Request) returns (stream CalculatorResponse);
+  rpc CalculateAverage(stream Request) returns(CalculatorResponse);
+  rpc CalculateMax(stream Request) returns(stream CalculatorResponse);
+}
+
